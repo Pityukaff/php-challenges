@@ -1,23 +1,22 @@
 <?php
-    //while (!PHP_EOF)
-        $str = '09#65#21'; // ucitaj novu liniju
+    $file = fopen("C:\Users\Pityu\Documents\PHP_Challenges\php-challenges\junior\iso6801\date-input.txt", "r") or die("Unable to open the file!");
+    $output = fopen("C:\Users\Pityu\Documents\PHP_Challenges\php-challenges\junior\iso6801\date-output.txt", "w") or die("File does not exist!");
+    while (!feof($file)) {
+        $str = fgets($file);
         if (strpos($str, '#') !== false) {
-            // M YY DD    09#65#21
-            if (substr($str, 3) > "14") {
-                $date = "19".substr($str, 3, -3)."-".substr($str, 0, -6)."-".substr($str, 6);
+            if (substr($str, 3) >= "14") {
+                $date = "19" . substr($str, 3, 2) . "-" . substr($str, 6, 2) . "-" . substr($str, 0, 2);
             } else {
-                $date = "20".substr($str, 3, -3)."-".substr($str, 0, -6)."-".substr($str, 6);
+                $date = "20" . substr($str, 3, 2) . "-" . substr($str, 6, 2) . "-" . substr($str, 0, 2);
             }
         } elseif (strpos($str, '/') !== false) {
-            // MM DD YY   11/15/78
-            if (substr($str, 6) > "14") {
-                $date = "19".substr($str, 6)."-".substr($str, 0, -6)."-".substr($str, 3, -3);
+            if (substr($str, 6) >= "14") {
+                $date = "19" . substr($str, 6, 2) . "-" . substr($str, 0, 2) . "-" . substr($str, 3, 2);
             } else {
-                $date = "20".substr($str, 6)."-".substr($str, 0, -6)."-".substr($str, 3, -3);
+                $date = "20" . substr($str, 6, 2) . "-" . substr($str, 0, 2) . "-" . substr($str, 3, 2);
             }
         } elseif (strpos($str, ' ') !== false) {
-            // MMM DD YYYY   Dec 26, 75
-            switch (substr($str, 0, -7)) {
+            switch (substr($str, 0, 3)) {
                 case "Jan" :
                     $month = "01";
                     break;
@@ -55,21 +54,19 @@
                     $month = "12";
                     break;
             }
-            // MMM DD YYYY   Dec 26, 75
-            if (substr($str, 8) > "14") {
-                $date = "19".substr($str, 8)."-".$month."-".substr($str, 4, -4);
+            if (substr($str, 8) >= "14") {
+                $date = "19" . substr($str, 8, 2) . "-" . $month . "-" . substr($str, 4, 2);
             } else {
-                $date = "20".substr($str, 8)."-".$month."-".substr($str, 4, -4);
+                $date = "20" . substr($str, 8, 2) . "-" . $month . "-" . substr($str, 4, 2);
             }
         } elseif (strpos($str, '*') !== false) {
-            // DD MM YYYY   15*10*1981
-            $date = substr($str, 6)."-".substr($str, 3, -5)."-".substr($str, 0, -8);
+            $date = trim(substr($str, 6)) . "-" . substr($str, 3, 2) . "-" . substr($str, 0, 2);
         } else {
-            // YYYY MM DD   1964-01-10
-            $date = $str;
+            $date = trim($str);
         }
-        echo $date;
-        //upisi $date
-    //}
-        //GGGG-MM-DD
+        trim($date);
+        fwrite($output, $date . "\n");
+    }
+    fclose($file);
+    fclose($output);
 ?>
