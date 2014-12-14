@@ -2,7 +2,7 @@
     function printLex($lex){
         echo "{";
             foreach($lex as $value => $key) {
-                echo '"'."$value".'"'." : $key"; 
+                echo '"' . "$value" . '"' . " : $key" . ","; 
                 echo "\n";
             }
         echo "}";
