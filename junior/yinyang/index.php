@@ -26,5 +26,5 @@ class YinYang
         }
     }
 }
-YinYang::solve(15,0);
+YinYang::solve(4, 20);
 ?>

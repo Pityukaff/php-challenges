@@ -1,6 +1,6 @@
 <?php
-    $file = fopen("C:\Users\Pityu\Documents\PHP_Challenges\php-challenges\junior\iso6801\date-input.txt", "r") or die("Unable to open the file!");
-    $output = fopen("C:\Users\Pityu\Documents\PHP_Challenges\php-challenges\junior\iso6801\date-output.txt", "w") or die("File does not exist!");
+    $file = fopen("date-input.txt", "r") or die("Unable to open the file!");
+    $output = fopen("date-output.txt", "w") or die("File does not exist!");
     while (!feof($file)) {
         $str = fgets($file);
         if (strpos($str, '#') !== false) {
@@ -65,7 +65,7 @@
             $date = trim($str);
         }
         trim($date);
-        fwrite($output, $date . "\n");
+        fwrite($output, $date . PHP_EOL);
     }
     fclose($file);
     fclose($output);
