@@ -5,7 +5,7 @@ class YinYang
     {
         $a = $x;
         $b = $y;
-    
+        
         //if a is greater than b, swap their values
         if ($a > $b) {
             $a = $a + $b;
