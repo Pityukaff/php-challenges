@@ -4,11 +4,8 @@
     while (!feof($file)) {
         $str = fgets($file);
         if (strpos($str, '#') !== false) {
-            if (substr($str, 3) >= "14") {
-                $str = "19" . substr($str, 3, 2) . "-" . substr($str, 6, 2) . "-" . substr($str, 0, 2);
-            } else {
-                $str = "20" . substr($str, 3, 2) . "-" . substr($str, 6, 2) . "-" . substr($str, 0, 2);
-            }
+            $prefix = (substr($str, 3) >= "14") ? "19" : "20";
+            $str = $prefix . substr($str, 3, 2) . "-" . substr($str, 6, 2) . "-" . substr($str, 0, 2);
         } else {
             $str = str_replace('*', '-', $str);
             $str = date("Y-m-d", strtotime($str));
